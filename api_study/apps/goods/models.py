@@ -32,6 +32,27 @@ class GoodsCategory(models.Model):
     def __str__(self):
         return self.name
 
+
+class GoodsCategoryBrand(models.Model):
+    """
+    某一大类下的宣传商标
+    """
+    category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, related_name='brands', null=True, blank=True, verbose_name="商品类目")
+    name = models.CharField("品牌名", default="", max_length=30, help_text="品牌名")
+    desc = models.TextField("品牌描述", default="", max_length=200, help_text="品牌描述")
+    image = models.ImageField(max_length=200, upload_to="brands/")
+    add_time = models.DateTimeField("添加时间", default=datetime.datetime.now)
+
+    class Meta:
+        verbose_name = "宣传品牌"
+        verbose_name_plural = verbose_name
+        db_table = "goods_goodsbrand"
+
+    def __str__(self):
+        return self.name
+
+
+
 class Goods(models.Model):
     """
     商品

@@ -137,4 +137,6 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.UserProfile'
 
 #media路径
+# 设置上传文件的路径
+MEDIA_URL="/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
