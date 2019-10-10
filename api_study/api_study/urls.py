@@ -21,11 +21,12 @@ from rest_framework.routers import DefaultRouter
 
 import xadmin
 from api_study.settings import MEDIA_ROOT
-from goods.views import GoodsListView, GoodsListViewSet
+from goods.views import GoodsListView, GoodsListViewSet, CategoryViewSet
 
 router = DefaultRouter()
 #配置goods的url
 router.register(r'goods', GoodsListViewSet)
+router.register(r'categorys', CategoryViewSet, base_name="categorys")
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),

@@ -53,9 +53,11 @@ INSTALLED_APPS = [
     'goods',
     'trade',
     'user_operation',
+    'corsheaders',      #解决跨域应用
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',        #解决跨域中间件
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,8 +136,11 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-
+#自定义user
 AUTH_USER_MODEL = 'users.UserProfile'
+
+#跨域设置
+CORS_ORIGIN_ALLOW_ALL = True
 
 #media路径
 # 设置上传文件的路径
