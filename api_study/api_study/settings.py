@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+import datetime
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'trade',
     'user_operation',
     'corsheaders',      #解决跨域应用
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,28 @@ CORS_ORIGIN_ALLOW_ALL = True
 # 设置上传文件的路径
 MEDIA_URL="/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication'
+    )
+}
+#有效期限
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),     #也可设置seconds=20
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',                        #JWT跟前端保持一致，比如“token”这里设置成JWT
+}
+
+#自定义用户认证
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
+
+# 手机号码正则表达式
+REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
+
+#云片网APIKEY
+APIKEY = "xxxxx327d4be01608xxxxxxxxxx"

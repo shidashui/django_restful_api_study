@@ -16,17 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
+from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
+from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
 from api_study.settings import MEDIA_ROOT
 from goods.views import GoodsListView, GoodsListViewSet, CategoryViewSet
+from users.views import SmsCodeViewset, UserViewset
 
 router = DefaultRouter()
 #配置goods的url
 router.register(r'goods', GoodsListViewSet)
 router.register(r'categorys', CategoryViewSet, base_name="categorys")
+#users
+router.register(r'code', SmsCodeViewset, base_name="code")
+router.register(r'users', UserViewset, base_name="users")
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -36,6 +42,10 @@ urlpatterns = [
     path('media/<path:path>', serve, {'document_root':MEDIA_ROOT}),
     #drf文档， title自定义
     path('docs', include_docs_urls(title='docs for test')),
+    #token
+    path('api-token-auth/', views.obtain_auth_token),
+    #jwt的token认证接口
+    path('login/', obtain_jwt_token),
 
     #商品列表页
     re_path('^', include(router.urls)),
