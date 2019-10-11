@@ -74,7 +74,7 @@ ROOT_URLCONF = 'api_study.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,8 +137,14 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS=(
+    os.path.join(BASE_DIR,"static"),
+)
+
+
 
 #自定义user
+#重载系统的用户，让UserProfile生效
 AUTH_USER_MODEL = 'users.UserProfile'
 
 #跨域设置
@@ -175,3 +181,7 @@ REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 
 #云片网APIKEY
 APIKEY = "xxxxx327d4be01608xxxxxxxxxx"
+
+
+#登录成功后跳转到首页
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index/'

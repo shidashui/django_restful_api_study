@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 from django.views.static import serve
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
@@ -24,6 +25,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 import xadmin
 from api_study.settings import MEDIA_ROOT
 from goods.views import GoodsListView, GoodsListViewSet, CategoryViewSet
+from trade.views import ShoppingCartViewset, OrderViewset
 from user_operation.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 from users.views import SmsCodeViewset, UserViewset
 
@@ -38,12 +40,17 @@ router.register(r'users', UserViewset, base_name="users")
 router.register(r'userfavs', UserFavViewset, base_name="userfavs")
 router.register(r'messages', LeavingMessageViewset, base_name="messages")
 router.register(r'address', AddressViewset, base_name="address")
+#trade
+router.register(r'shopcarts', ShoppingCartViewset, base_name="shopcarts")
+router.register(r'orders', OrderViewset, base_name="orders")
 
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('ueditor/',include('DjangoUeditor.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    #首页
+    path('index/', TemplateView.as_view(template_name='index.html'),name='index'),
     #文件
     path('media/<path:path>', serve, {'document_root':MEDIA_ROOT}),
     #drf文档， title自定义
