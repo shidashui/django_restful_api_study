@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, mixins, viewsets, filters
@@ -38,7 +36,7 @@ class GoodsListView(generics.ListAPIView):
     serializer_class = GoodsSerializer
 
 
-class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class GoodsListViewSet(mixins.ListModelMixin,mixins.RetrieveModelMixin ,viewsets.GenericViewSet):
     """
     商品列表分页
     """
