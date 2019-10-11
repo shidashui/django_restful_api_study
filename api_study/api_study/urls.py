@@ -24,7 +24,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 import xadmin
 from api_study.settings import MEDIA_ROOT
 from goods.views import GoodsListView, GoodsListViewSet, CategoryViewSet
-from user_operation.views import UserFavViewset
+from user_operation.views import UserFavViewset, LeavingMessageViewset
 from users.views import SmsCodeViewset, UserViewset
 
 router = DefaultRouter()
@@ -36,6 +36,7 @@ router.register(r'code', SmsCodeViewset, base_name="code")
 router.register(r'users', UserViewset, base_name="users")
 #user_operation
 router.register(r'userfavs', UserFavViewset, base_name="userfavs")
+router.register(r'messages', LeavingMessageViewset, base_name="messages")
 
 
 urlpatterns = [
