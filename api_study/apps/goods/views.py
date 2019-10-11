@@ -38,7 +38,10 @@ class GoodsListView(generics.ListAPIView):
 
 class GoodsListViewSet(mixins.ListModelMixin,mixins.RetrieveModelMixin ,viewsets.GenericViewSet):
     """
-    商品列表分页
+    list:
+        商品列表，分页，搜索，过滤，排序
+    retrieve:
+        获取商品详情
     """
     pagination_class = GoodsPagination
     #这里必须要定义一个默认的排序，否则会报错

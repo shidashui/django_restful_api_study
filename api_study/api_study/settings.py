@@ -155,7 +155,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication'
-    )
+    ),
+    #报错：'AutoSchema' object has no attribute 'get_link'
+    'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.AutoSchema'
 }
 #有效期限
 JWT_AUTH = {
