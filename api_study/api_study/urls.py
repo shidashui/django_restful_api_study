@@ -24,7 +24,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
 from api_study.settings import MEDIA_ROOT
-from goods.views import GoodsListView, GoodsListViewSet, CategoryViewSet
+from goods.views import GoodsListView, GoodsListViewSet, CategoryViewSet, BannerViewset, IndexCategoryViewset
 from trade.views import ShoppingCartViewset, OrderViewset
 from user_operation.views import UserFavViewset, LeavingMessageViewset, AddressViewset
 from users.views import SmsCodeViewset, UserViewset
@@ -33,6 +33,8 @@ router = DefaultRouter()
 #配置goods的url
 router.register(r'goods', GoodsListViewSet)
 router.register(r'categorys', CategoryViewSet, base_name="categorys")
+router.register(r'banners', BannerViewset, base_name="banners")
+router.register(r'indexgoods', IndexCategoryViewset, base_name="indexgoods")
 #users
 router.register(r'code', SmsCodeViewset, base_name="code")
 router.register(r'users', UserViewset, base_name="users")
